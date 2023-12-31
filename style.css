@@ -33,6 +33,11 @@ width: 100px;
     margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 .Top_container{
     width: 100%;
@@ -145,16 +150,32 @@ padding: 4px 12px;
     margin-top: 10px;
     border-radius: 8px;
 }
+.newGame{
+    padding: 6px 11px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: blueviolet;
+    color: orange;
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.won{
+    font-size: 3vw;
+    font-weight: 600;
+ 
+}
 @media only screen and (max-width:800px){
     .Bottom_container{
         flex-direction: column;
-        justify-content: center;
+        /* justify-content: center; */
         align-items:center ;
-        margin-top: 5px;
+        margin-top: 0px;
     }
     .Game_container{
-        grid-template-columns: repeat(3,70px);
-        grid-template-rows: repeat(3,70px);
+        grid-template-columns: repeat(3,24vw);
+        grid-template-rows: repeat(3,24vw);
        margin-top: 20px;
     }
     .score h3{
@@ -165,9 +186,7 @@ padding: 4px 12px;
         height: 35px;
         border-radius: 6px;
     }
-    .Top_container{
-        height: 60px;
-    }
+    
     .info_container{
         margin-top: 10px;
     }
@@ -177,9 +196,19 @@ padding: 4px 12px;
     .info{
         font-size: 1.4rem;
     }
-    .gif img{
-        width: 30%;
-        /* margin: 0 auto; */
+     .gif img{
+        /* width: 30%; */
+        
         margin-right: 20px;
+    }   
+    .won{
+        font-size: 4vw;
+    }
+    .box_text{
+        font-size: 2.6rem;
+    }
+    .nav_bar{
+        /* margin-top: 10px; */
+        padding-top: 10px;
     }
 }

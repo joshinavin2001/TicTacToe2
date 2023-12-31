@@ -8,15 +8,17 @@ let isgameover = false;
 function changeTurn() {
   return turn == "X" ? "0" : "X";
 }
-let blankX=document.querySelector(".bl-X")
-let blankY=document.querySelector(".bl-Y")
+let newgame = document.querySelector(".newGame");
+let blankX = document.querySelector(".bl-X");
+let won = document.querySelector(".won");
+let blankY = document.querySelector(".bl-Y");
 let boxText = document.getElementsByClassName("box_text");
 //function to win Game//
+
+let image = document.querySelector(".gif img");
 const WinGame = () => {
-    let info=document.querySelector(".info")
-    let image=document.querySelector(".gif img")
-   
-  
+  let info = document.querySelector(".info");
+
   let winnigCondition = [
     [0, 1, 2],
     [3, 4, 5],
@@ -33,38 +35,60 @@ const WinGame = () => {
       boxText[e[2]].innerText === boxText[e[1]].innerText &&
       boxText[e[0]].innerText !== ""
     ) {
-      
-         info.innerText=boxText[e[0]].innerText+" Won"
-         isgameover = true;
-         image.style.width="18vw"
-         image.style.transition="2s"
-        
-         if( info.innerText=="X Won"){
-            let count=0
-            for(let i=0;i<=0;i++){
-                count++
-                blankX.innerHTML=count///////////////////////////////////////++++++++++++++++++++*********///
-            }
-         
-            
-           let boxText=document.getElementsByClassName("box_text")
-           Array.from(boxText).forEach(function(element){
-            
-              element.innerHTML=""
-           })
-         }else{
-            blankY.innerHTML=1
-            let boxText=document.getElementsByClassName("box_text")
-           Array.from(boxText).forEach(function(element){
-            
-              element.innerHTML=""
-           })
-           
-         }
-    //   document.querySelector(".info").boxText[e[0]].innerHTML = "Won";
+      info.innerHTML = boxText[e[0]].innerText + " Won";
+      won.innerHTML = info.innerHTML;
+      isgameover = true;
+      image.style.width = "18vw";
+      image.style.transition = "2s";
+
+      boxText[e[0]].style.color = "orange";
+      boxText[e[1]].style.color = "orange";
+      boxText[e[2]].style.color = "orange";
+
+      updatescore();
     }
   });
 };
+let scoreX = 0;
+let scoreY = 0;
+function updatescore() {
+  if (info.innerText == "X Won") {
+    scoreX++;
+    // music.play()
+    blankX.innerHTML = scoreX;
+    won.innerHTML = "X WON";
+    isgameover = false;
+    setTimeout(function () {
+      let boxText = document.getElementsByClassName("box_text");
+      Array.from(boxText).forEach(function (element) {
+        setTimeout(function () {
+          element.style.color = "black";
+        }, 1000);
+        element.innerHTML = "";
+        won.innerHTML=""
+        
+        image.style.width = "0vw";
+      });
+    }, 2000);
+  } else {
+    isgameover = false;
+    scoreY++;
+    blankY.innerHTML = scoreY;
+    won.innerHTML = "0 WON";
+    //  boxText.style.color="red"
+    setTimeout(function () {
+      let boxText = document.getElementsByClassName("box_text");
+      Array.from(boxText).forEach(function (element) {
+        element.innerHTML = "";
+        won.innerHTML ="";
+       
+        element.style.color = "black";
+        image.style.width = "0vw";
+      });
+    }, 1000);
+  }
+  info.innerHTML = "Turn For " + turn;
+}
 
 //Game Logic//
 let boxes = document.getElementsByClassName("box");
@@ -76,9 +100,31 @@ Array.from(boxes).forEach(function (elem) {
       boxText.innerHTML = turn;
       turn = changeTurn();
       WinGame();
+      turnAudio.play()
+      // checkTie()
       if (!isgameover) {
         info.innerHTML = "Turn For " + turn;
+      } else if (elem.innerHTML !== "") {
+        won.innerHTML = "won";
       }
     }
   });
+});
+
+//reset//
+
+let btn = document.querySelector(".btn");
+btn.addEventListener("click", function () {
+  let boxText = document.getElementsByClassName("box_text");
+  Array.from(boxText).forEach(function (element) {
+    element.innerHTML = "";
+    image.style.width = "0vw";
+    won.innerHTML=""
+  });
+});
+
+//newgame button//
+newgame.addEventListener("click", function () {
+  window.location.reload();
+  image.style.display= "none";
 });
