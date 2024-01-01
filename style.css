@@ -166,7 +166,7 @@ padding: 4px 12px;
     font-weight: 600;
  
 }
-@media only screen and (max-width:800px){
+@media only screen and (max-width:800px) and (min-width:500px){
     .Bottom_container{
         flex-direction: column;
         /* justify-content: center; */
@@ -211,4 +211,38 @@ padding: 4px 12px;
         /* margin-top: 10px; */
         padding-top: 10px;
     }
+}
+@media only screen and (max-width:500px){
+    .main_container{
+    width: 95%;
+    height: 85%;
+    
+  }
+  .Bottom_container{
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     /* width: 100%; */
+     margin-top: 0px;
+  }
+  .Game_container{
+    grid-template-columns: repeat(3,24vw);
+    grid-template-rows: repeat(3,24vw);
+   margin-top: 20px;
+}
+.info_container{
+    margin-top: 20px;
+}
+.info{
+    font-size: 1.2rem;
+}
+.info_container h1{
+    font-size: 1.2rem;
+}
+.box_text{
+    font-size: 2rem;
+}
+.gif img{
+    margin-left: 30px;
+} 
 }
